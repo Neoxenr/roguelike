@@ -8,7 +8,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 find_package(BearLibTerminal REQUIRED)
 include_directories(SYSTEM ${BLT_INCLUDE_DIRS})
 
-add_executable(trex main.cpp)
+add_executable(${PROJECT_NAME} ./src/main.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${BLT_LIBRARIES})
 
