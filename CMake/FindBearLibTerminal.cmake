@@ -8,18 +8,18 @@
 #  BLT_DEFINITIONS - Compiler switches required for using BearLibTerminal
 
 # Find out if this is a 32 or 64 bit build
-if( CMAKE_SIZEOF_VOID_P EQUAL 8)
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
     MESSAGE(STATUS "64 bit system detected.")
-    SET( EX_PLATFORM 64)
-    SET( EX_PLATFORM_NAME "x64")
+    SET(EX_PLATFORM 64)
+    SET(EX_PLATFORM_NAME "x64")
 else ()
     MESSAGE(STATUS "32 bit system detected.")
-    SET( EX_PLATFORM 32)
-    SET( EX_PLATFORM_NAME "x86")
+    SET(EX_PLATFORM 32)
+    SET(EX_PLATFORM_NAME "x86")
 endif ()
 
 # Set the proper directory
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(LIB_PATHS "${CMAKE_SOURCE_DIR}/lib/BearLibTerminal/OSX")
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     set(LIB_PATHS "${CMAKE_SOURCE_DIR}/lib/BearLibTerminal/Windows${EX_PLATFORM}")

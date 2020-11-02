@@ -454,7 +454,7 @@ TERMINAL_INLINE void terminal_wfont(const wchar_t* name)
 	TERMINAL_CAT(terminal_font, TERMINAL_WCHAR_SUFFIX)((const TERMINAL_WCHAR_TYPE*)name);
 }
 
-TERMINAL_INLINE dimensions_t terminal_print(int x, int y, const char* s)
+TERMINAL_INLINE dimensions_t terminal_print(int x, int y, const int8_t* s)
 {
 	dimensions_t ret;
 	terminal_print_ext8(x, y, 0, 0, TK_ALIGN_DEFAULT, (const int8_t*)s, &ret.width, &ret.height);
@@ -463,7 +463,7 @@ TERMINAL_INLINE dimensions_t terminal_print(int x, int y, const char* s)
 
 TERMINAL_INLINE dimensions_t terminal_printf(int x, int y, const char* s, ...)
 {
-	TERMINAL_FORMATTED_WRAP(dimensions_t, terminal_print(x, y, terminal_vsprintf(s, args)))
+	TERMINAL_FORMATTED_WRAP(dimensions_t, terminal_print(x, y, reinterpret_cast<const int8_t*>(terminal_vsprintf(s, args))))
 }
 
 TERMINAL_INLINE dimensions_t terminal_wprint(int x, int y, const wchar_t* s)
