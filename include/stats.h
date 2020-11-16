@@ -4,12 +4,13 @@
 
 class Stats {
  private:
-  int count_coins;
-  int count_steps;
+  static int count_coins;
+  static int count_steps;
 
  public:
-  Stats() : count_coins(0), count_steps(0) {}
-  int &get_count_coins();
-  int &get_count_steps();
+  static int getCountCoins();
+  static int getCountSteps();
+  static void setCountCoins(const int num);
+  static void setCountSteps(const int num);
   void Render();
 };

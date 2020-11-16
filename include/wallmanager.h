@@ -2,20 +2,18 @@
 
 #include <BearLibTerminal.h>
 
-#include <ctime>
 #include <vector>
 
-#include "coin.h"
+#include "wall.h"
 
-class CoinManager {
+class WallManager {
  private:
-  std::vector<Coin*> coins;
+  std::vector<Wall*> walls;
   int count = 0;
 
  public:
   int getCount() const;
-  void setCount(const int num);
   void Create(int x, int y, int sym);
   void Render() const;
-  std::vector<Coin*>&getCoins();
+  std::vector<Wall*>& getWalls();
 };

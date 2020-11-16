@@ -1,18 +1,24 @@
 #include <BearLibTerminal.h>
 
 #include "coinmanager.h"
+#include "collision.h"
+#include "levelreader.h"
 #include "player.h"
+#include "wallmanager.h"
 
 int main() {
   terminal_open();
   terminal_refresh();
 
-  Ground ground;
   Controls controls;
+  Player player(&controls);
   Stats stats;
-  Player player(controls, ground, &stats);
-  CoinManager coins(ground);
-  coins.Create();
+  CoinManager coins;
+  WallManager walls;
+  Collision collision(player, &walls, &coins, &controls);
+  LevelReader file(&coins, &walls);
+
+  file.readLevel("level1.txt");
 
   while (true) {
     terminal_clear();
@@ -22,8 +28,11 @@ int main() {
     if (controls.Is_Exit()) break;
 
     coins.Render();
+    walls.Render();
+    collision.notPassWall();
     player.Update();
-    player.Take(coins);
+    collision.passAndTake();
+
     stats.Render();
 
     terminal_refresh();

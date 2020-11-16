@@ -7,7 +7,7 @@ build:
 	cd cmake-build-debug;mingw32-make
 
 exec:
-	./cmake-build-debug/trex
+	./cmake-build-debug/MyFirstGame
 
 clean:
 	rm -rf cmake-build-debug
