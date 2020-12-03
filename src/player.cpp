@@ -5,21 +5,21 @@ void Player::Render() const {
 }
 
 void Player::Move() {
-  if (control.Is_Up() && player_y > 0) {
+  if (control->Is_Up() && player_y > 0) {
     player_y -= 1;
-    ++stats->get_count_steps();
+    Stats::setCountSteps(Stats::getCountSteps() + 1);
   }
-  if (control.Is_Down() && player_y < ground.Ground_Y() - 2) {
+  if (control->Is_Down() && player_y < 23) {
     player_y += 1;
-    ++stats->get_count_steps();
+    Stats::setCountSteps(Stats::getCountSteps() + 1);
   }
-  if (control.Is_Left() && player_x > 0) {
+  if (control->Is_Left() && player_x > 0) {
     player_x -= 1;
-    ++stats->get_count_steps();
+    Stats::setCountSteps(Stats::getCountSteps() + 1);
   }
-  if (control.Is_Right() && player_x < ground.Ground_X() - 1) {
+  if (control->Is_Right() && player_x < 79) {
     player_x += 1;
-    ++stats->get_count_steps();
+    Stats::setCountSteps(Stats::getCountSteps() + 1);
   }
 }
 
@@ -28,15 +28,10 @@ void Player::Update() {
   Render();
 }
 
-bool Player::Is_Coin(const Coin* coin) const {
-  return coin->get_coin_pos_x() == player_x && coin->get_coin_pos_y() == player_y;
+int Player::getPosX() const {
+  return player_x;
 }
 
-void Player::Take(const CoinManager& coins) const {
-  for (int i = 0; i < coins.GetCount(); i++)
-    if (Is_Coin(coins.GetCoins()[i]) && !coins.GetCoins()[i]->get_coin_mark()) {
-      coins.GetCoins()[i]->get_coin_sym() = ' ';
-      coins.GetCoins()[i]->get_coin_mark() = true;
-      ++stats->get_count_coins();
-    }
+int Player::getPosY() const {
+  return player_y;
 }

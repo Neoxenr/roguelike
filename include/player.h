@@ -6,19 +6,17 @@
 
 class Player {
  private:
-  const Controls &control;
-  const Ground &ground;
-  Stats *stats;
+  Controls *control;
   int player_x;
   int player_y;
   char symbol = '@';
 
  public:
-  Player(const Controls &control, const Ground &ground, Stats *st, int x = 0, int y = 0)
-      : control(control), ground(ground), stats(st), player_x(x), player_y(y) {}
+  explicit Player(Controls *control, int x = 0, int y = 0)
+      : control(control), player_x(x), player_y(y) {}
+  int getPosX() const;
+  int getPosY() const;
   void Render() const;
   void Move();
   void Update();
-  void Take(const CoinManager &coins) const;
-  bool Is_Coin(const Coin *coin) const;
 };

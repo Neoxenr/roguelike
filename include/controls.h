@@ -12,9 +12,9 @@ class Controls {
 
  public:
   bool Is_Exit() const;
-  bool Is_Up() const;
-  bool Is_Down() const;
-  bool Is_Right() const;
-  bool Is_Left() const;
+  bool &Is_Up();
+  bool &Is_Down();
+  bool &Is_Right();
+  bool &Is_Left();
   void Update();
 };

@@ -4,19 +4,19 @@ bool Controls::Is_Exit() const {
   return is_exit;
 }
 
-bool Controls::Is_Up() const {
+bool &Controls::Is_Up()  {
   return is_up;
 }
 
-bool Controls::Is_Down() const {
+bool &Controls::Is_Down()  {
   return is_down;
 }
 
-bool Controls::Is_Right() const {
+bool &Controls::Is_Right()  {
   return is_right;
 }
 
-bool Controls::Is_Left() const {
+bool &Controls::Is_Left()  {
   return is_left;
 }
 

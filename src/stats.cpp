@@ -1,16 +1,26 @@
 #include "stats.h"
 
-int &Stats::get_count_coins() {
+int Stats::getCountCoins() {
   return count_coins;
 }
 
-int &Stats::get_count_steps() {
+int Stats::getCountSteps() {
   return count_steps;
 }
 
-void Stats::Render() {
-  std::string str1 = std::to_string(get_count_coins());
-  std::string str2 = std::to_string(get_count_steps());
-  terminal_printf(0, 24, "Coins: [color=green]%s[/color]", str1.c_str());
-  terminal_printf(10, 24, "Steps: [color=purple]%s[/color]", str2.c_str());
+void Stats::setCountCoins(const int num) {
+  count_coins = num;
 }
+
+void Stats::setCountSteps(const int num) {
+  count_steps = num;
+}
+
+void Stats::Render() {
+  terminal_printf(0, 24, "Coins: [color=green]%s[/color]", std::to_string(getCountCoins()).c_str());
+  terminal_printf(10, 24, "Steps: [color=purple]%s[/color]", std::to_string(getCountSteps()).c_str());
+}
+
+int Stats::count_coins = 0;
+
+int Stats::count_steps = 0;
