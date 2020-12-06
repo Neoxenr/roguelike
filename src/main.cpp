@@ -1,39 +1,38 @@
 #include <BearLibTerminal.h>
 
-#include "coinmanager.h"
-#include "collision.h"
-#include "levelreader.h"
-#include "player.h"
-#include "wallmanager.h"
+#include "../include/components/collisioncomponent.h"
+#include "../include/lib/engine.h"
+#include "../include/systems/rendersystem.h"
 
 int main() {
   terminal_open();
   terminal_refresh();
 
-  Controls controls;
-  Player player(&controls);
-  Stats stats;
-  CoinManager coins;
-  WallManager walls;
-  Collision collision(player, &walls, &coins, &controls);
-  LevelReader file(&coins, &walls);
+  Engine engine;
 
-  file.readLevel("level1.txt");
+  engine.GetSystemManager()->AddSystem<LevelSystem>();
+  engine.GetSystemManager()->AddSystem<ControlsSystem>();
+  engine.GetSystemManager()->AddSystem<CollisionSystem>();
+  engine.GetSystemManager()->AddSystem<MovementSystem>();
+  engine.GetSystemManager()->AddSystem<StatsSystem>();
+  engine.GetSystemManager()->AddSystem<RenderSystem>();
+
+  auto player = engine.GetEntityManager()->CreateEntity();
+
+  player->SetTag("Player");
+  player->Add<PositionComponent>(std::make_shared<PositionComponent>(1, 1));
+  player->Add<TextureComponent>(std::make_shared<TextureComponent>('@'));
+  player->Add<ControlsComponent>();
+  player->Add<CollisionComponent>();
+  player->Add<StatsComponent>();
+  player->Add<LevelInformationComponent>();
 
   while (true) {
     terminal_clear();
 
-    controls.Update();
+    engine.Update();
 
-    if (controls.Is_Exit()) break;
-
-    coins.Render();
-    walls.Render();
-    collision.notPassWall();
-    player.Update();
-    collision.passAndTake();
-
-    stats.Render();
+    if (player->Get<ControlsComponent>()->IsExit()) break;
 
     terminal_refresh();
   }
