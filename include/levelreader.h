@@ -1,19 +1,19 @@
 #pragma once
 
 #include <fstream>
+#include <map>
 #include <string>
+#include <utility>
 
-#include "coinmanager.h"
 #include "ireader.h"
-#include "wallmanager.h"
 
 class LevelReader : public IReader {
  private:
   std::ifstream file;
-  CoinManager *coins;
-  WallManager *walls;
+  std::map<std::pair<std::string, std::pair<int, int>>, char> data;
 
  public:
-  LevelReader(CoinManager *c, WallManager *w) : coins(c), walls(w) {}
-  void readLevel(std::string level_name);
+  LevelReader() {}
+  void readLevel(const std::string level_name);
+  const std::map<std::pair<std::string, std::pair<int, int>>, char>& getData();
 };
