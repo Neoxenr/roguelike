@@ -1,6 +1,7 @@
 #include <BearLibTerminal.h>
 
 #include "../include/components/collisioncomponent.h"
+#include "../include/config.h"
 #include "../include/lib/engine.h"
 #include "../include/systems/rendersystem.h"
 
@@ -21,11 +22,11 @@ int main() {
 
   player->SetTag("Player");
   player->Add<PositionComponent>(std::make_shared<PositionComponent>(1, 1));
-  player->Add<TextureComponent>(std::make_shared<TextureComponent>('@'));
+  player->Add<TextureComponent>(std::make_shared<TextureComponent>(player_texture, player_color));
   player->Add<ControlsComponent>();
   player->Add<CollisionComponent>();
   player->Add<StatsComponent>();
-  player->Add<LevelInformationComponent>();
+  player->Add<LevelsInformationComponent>();
 
   while (true) {
     terminal_clear();

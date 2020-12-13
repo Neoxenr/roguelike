@@ -19,3 +19,18 @@ bool CollisionComponent::IsLeftObject() const {
 bool CollisionComponent::IsCoin() const {
   return is_coin;
 }
+
+bool CollisionComponent::IsNextDoor() const {
+  return is_next_door;
+}
+
+bool CollisionComponent::IsBackDoor() const {
+  return is_back_door;
+}
+
+void CollisionComponent::SetNextDoor(bool value) {
+  is_next_door = value;
+}
+void CollisionComponent::SetBackDoor(bool value) {
+  is_back_door = value;
+}

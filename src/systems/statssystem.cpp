@@ -1,6 +1,7 @@
 #include "../include/systems/statssystem.h"
 
-#include "../include/components/levelinformationcomponent.h"
+#include "../include/components/levelsinformationcomponent.h"
+#include "config.h"
 
 void StatsSystem::Update() {
   auto player = GetEntityManager()->FindFirstByTag("Player");
@@ -8,9 +9,9 @@ void StatsSystem::Update() {
   auto position = player->Get<PositionComponent>();
   auto controls = player->Get<ControlsComponent>();
   auto collision = player->Get<CollisionComponent>();
-  auto level = player->Get<LevelInformationComponent>();
+  auto level = player->Get<LevelsInformationComponent>();
 
-  if (level->IsCompleted() && controls->IsEnter()) {
+  if ((level->IsCompleted() && controls->IsEnter()) || collision->IsBackDoor()) {
     stats->steps_count = 0;
     stats->coins_count = 0;
   }
@@ -23,11 +24,11 @@ void StatsSystem::Update() {
     ++stats->steps_count;
   }
 
-  if (controls->IsDown() && !collision->IsDownObject() && position->getY() < 23 && !level->IsCompleted()) {
+  if (controls->IsDown() && !collision->IsDownObject() && position->getY() < window_height && !level->IsCompleted()) {
     ++stats->steps_count;
   }
 
-  if (controls->IsRight() && !collision->IsRightObject() && position->getX() < 79 && !level->IsCompleted()) {
+  if (controls->IsRight() && !collision->IsRightObject() && position->getX() < window_widht && !level->IsCompleted()) {
     ++stats->steps_count;
   }
 
