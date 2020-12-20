@@ -10,6 +10,8 @@
 #include "../components/levelsinformationcomponent.h"
 #include "../components/positioncomponent.h"
 #include "../components/statscomponent.h"
+#include "../components/healthcomponent.h"
+#include "../components/scopecomponent.h"
 #include "../components/texturecomponent.h"
 #include "../include/levelgenerator.h"
 #include "../include/levelreader.h"

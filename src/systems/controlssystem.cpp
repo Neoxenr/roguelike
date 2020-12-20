@@ -25,9 +25,13 @@ void ControlsSystem::Update() {
 
     if (event == TK_ENTER) button->is_enter = true;
 
-    if (event == TK_1 && !button->is_two) button->is_one = true;
+    if (event == TK_1 && !button->is_one && !button->is_two) button->is_one = true;
 
-    if (event == TK_2 && !button->is_one) button->is_two = true;
+    if (event == TK_2 && !button->is_two && !button->is_one) button->is_two = true;
+
+    if (event == TK_3 && !button->is_three && !button->is_four) button->is_three = true;
+
+    if (event == TK_4 && !button->is_four && !button->is_three) button->is_four = true;
 
     if (event == TK_CLOSE) button->is_exit = true;
   }

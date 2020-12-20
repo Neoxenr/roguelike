@@ -20,6 +20,10 @@ bool CollisionComponent::IsCoin() const {
   return is_coin;
 }
 
+bool CollisionComponent::IsEnemy() const {
+  return is_enemy;
+}
+
 bool CollisionComponent::IsNextDoor() const {
   return is_next_door;
 }

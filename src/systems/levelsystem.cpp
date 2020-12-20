@@ -30,9 +30,9 @@ void LevelSystem::getDataForLevels(const bool mode) {
 void LevelSystem::Change() {
   auto player = GetEntityManager()->FindFirstByTag("Player");
   auto x = player->Get<PositionComponent>()->getX();
-  auto y = player->Get<PositionComponent>()->getY() + 1;
+  auto y = player->Get<PositionComponent>()->getY();
   player->Delete<PositionComponent>();
-  player->Add<PositionComponent>(std::make_shared<PositionComponent>(x, y));
+  player->Add<PositionComponent>(std::make_shared<PositionComponent>(x, y + 1));
 
   if (level_id > 0) {
     auto door = FindDoor("level" + std::to_string(level_id - 1));
@@ -61,9 +61,20 @@ void LevelSystem::Create(const std::string level_name) {
       }
       if (elem.second == door_texture) {
         temp->SetTag("NextDoor");
-        temp->Add<TextureComponent>(std::make_shared<TextureComponent>(door_texture, door_color));
+        temp->Add<TextureComponent>(std::make_shared<TextureComponent>(door_texture, next_door_color));
         temp->Add<PositionComponent>(
             std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
+      }
+      if (elem.second == enemy_texture) {
+        temp->SetTag("Enemy");
+        temp->Add<TextureComponent>(std::make_shared<TextureComponent>(enemy_texture, enemy_color));
+        temp->Add<PositionComponent>(
+            std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
+        temp->Add<ScopeComponent>(
+            std::make_shared<ScopeComponent>(elem.first.second.first - 5, elem.first.second.first + 5,
+                                             elem.first.second.second - 3, elem.first.second.second + 3));
+        temp->Add<HealthComponent>(std::make_shared<HealthComponent>(100));
+        temp->Add<CollisionComponent>();
       }
     }
   }
@@ -88,7 +99,6 @@ void LevelSystem::Update() {
         getDataForLevels(1);
         Create("level" + std::to_string(level_id));
         Change();
-        level->is_init = true;
         level->is_created = true;
         level->is_completed = false;
       }
@@ -96,7 +106,6 @@ void LevelSystem::Update() {
         getDataForLevels(0);
         Create("level" + std::to_string(level_id));
         Change();
-        level->is_init = true;
         level->is_created = true;
         level->is_completed = false;
       }

@@ -12,17 +12,27 @@ void CollisionSystem::Update() {
   check_object->down_object = false;
   check_object->left_object = false;
   check_object->right_object = false;
+  check_object->is_enemy = false;
   check_object->is_coin = false;
 
   for (const auto &elem : GetEntityManager()->getEntities()) {
     if (elem->GetTag() != "Player") {
       auto elem_position = elem->Get<PositionComponent>();
 
-      if (elem_position->getX() == position->getX() && elem_position->getY() == position->getY()) {
+      if (static_cast<int>(elem_position->getX()) == static_cast<int>(position->getX()) &&
+          static_cast<int>(elem_position->getY()) == static_cast<int>(position->getY())) {
         if (elem->GetTag() == "Coin") {
           GetEntityManager()->DeleteEntity(elem->GetId());
           check_object->is_coin = true;
           break;
+        }
+        if (elem->GetTag() == "Wall") {
+          GetEntityManager()->DeleteEntity(elem->GetId());
+          break;
+          //  если игрок в стене заспавнился
+        }
+        if (elem->GetTag() == "Enemy") {
+          check_object->is_enemy = true;
         }
         if (elem->GetTag() == "NextDoor") {
           check_object->is_next_door = true;
@@ -32,20 +42,20 @@ void CollisionSystem::Update() {
           check_object->is_back_door = true;
         }
       }
-      if ((elem_position->getX() - position->getX() == 1) && (elem_position->getY() == position->getY()) &&
-          elem->GetTag() == "Wall") {
+      if ((static_cast<int>(elem_position->getX()) - static_cast<int>(position->getX()) == 1) &&
+          (static_cast<int>(elem_position->getY()) == static_cast<int>(position->getY())) && elem->GetTag() == "Wall") {
         check_object->right_object = true;
       }
-      if ((position->getX() - elem_position->getX() == 1) && (elem_position->getY() == position->getY()) &&
-          elem->GetTag() == "Wall") {
+      if ((static_cast<int>(position->getX()) - static_cast<int>(elem_position->getX()) == 1) &&
+          (static_cast<int>(elem_position->getY()) == static_cast<int>(position->getY())) && elem->GetTag() == "Wall") {
         check_object->left_object = true;
       }
-      if ((elem_position->getY() - position->getY() == 1) && (elem_position->getX() == position->getX()) &&
-          elem->GetTag() == "Wall") {
+      if ((static_cast<int>(elem_position->getY()) - static_cast<int>(position->getY()) == 1) &&
+          (static_cast<int>(elem_position->getX()) == static_cast<int>(position->getX())) && elem->GetTag() == "Wall") {
         check_object->down_object = true;
       }
-      if ((position->getY() - elem_position->getY() == 1) && (elem_position->getX() == position->getX()) &&
-          elem->GetTag() == "Wall") {
+      if ((static_cast<int>(position->getY()) - static_cast<int>(elem_position->getY()) == 1) &&
+          (static_cast<int>(elem_position->getX()) == static_cast<int>(position->getX())) && elem->GetTag() == "Wall") {
         check_object->up_object = true;
       }
     }

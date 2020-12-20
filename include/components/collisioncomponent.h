@@ -10,6 +10,7 @@ class CollisionComponent : public IComponent {
   bool down_object;
   bool right_object;
   bool left_object;
+  bool is_enemy;
   bool is_coin;
   bool is_next_door = false;
   bool is_back_door = false;
@@ -20,6 +21,7 @@ class CollisionComponent : public IComponent {
   bool IsRightObject() const;
   bool IsLeftObject() const;
   bool IsCoin() const;
+  bool IsEnemy() const;
   bool IsNextDoor() const;
   bool IsBackDoor() const;
   void SetNextDoor(bool value);

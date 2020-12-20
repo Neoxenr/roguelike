@@ -28,7 +28,7 @@ void StatsSystem::Update() {
     ++stats->steps_count;
   }
 
-  if (controls->IsRight() && !collision->IsRightObject() && position->getX() < window_widht && !level->IsCompleted()) {
+  if (controls->IsRight() && !collision->IsRightObject() && position->getX() < window_width && !level->IsCompleted()) {
     ++stats->steps_count;
   }
 
