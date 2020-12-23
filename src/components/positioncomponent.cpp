@@ -1,9 +1,9 @@
 #include "../include/components/positioncomponent.h"
 
-int PositionComponent::getX() const {
+float PositionComponent::getX() const {
   return x;
 }
 
-int PositionComponent::getY() const {
+float PositionComponent::getY() const {
   return y;
 }

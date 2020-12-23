@@ -3,13 +3,15 @@
 #include "../include/systems/levelsystem.h"
 #include "../lib/i_component.h"
 
-class LevelInformationComponent : public IComponent {
+class LevelsInformationComponent : public IComponent {
  private:
   friend class LevelSystem;
-  bool level_is_completed;
+  bool is_created;
+  bool is_completed;
 
  public:
-  LevelInformationComponent() : level_is_completed(false) {}
+  LevelsInformationComponent() : is_created(false), is_completed(false) {}
   bool IsCompleted() const;
+  bool IsCreated() const;
   void setCompleted(bool value);
 };

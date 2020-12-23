@@ -23,3 +23,19 @@ bool ControlsComponent::IsEnter() const {
 bool ControlsComponent::IsExit() const {
   return is_exit;
 }
+
+bool ControlsComponent::IsOne() const {
+  return is_one;
+}
+
+bool ControlsComponent::IsTwo() const {
+  return is_two;
+}
+
+bool ControlsComponent::IsThree() const {
+  return is_three;
+}
+
+bool ControlsComponent::IsFour() const {
+  return is_four;
+}
