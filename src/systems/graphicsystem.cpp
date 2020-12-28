@@ -5,11 +5,11 @@ void GraphicsSystem ::Update() {
   auto controls = player->Get<ControlsComponent>();
 
   if (controls->IsThree()) {
-    terminal_set("0x23: Sprites/wall.png, align=center");
-    terminal_set("0x24: Sprites/coin.png, align=center");
-    terminal_set("0x40: Sprites/player.png, align=center");
-    terminal_set("0x45: Sprites/enemy.png, align=center");
-    terminal_set("0x3E: Sprites/door.png, align=center");
+    terminal_set("0x23: sprites/wall.png, align=center");
+    terminal_set("0x24: sprites/coin.png, align=center");
+    terminal_set("0x40: sprites/player.png, align=center");
+    terminal_set("0x45: sprites/enemy.png, align=center");
+    terminal_set("0x3E: sprites/door.png, align=center");
   }
   if (controls->IsFour()) {
     terminal_set("0x23: none");

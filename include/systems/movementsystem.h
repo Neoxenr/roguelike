@@ -9,4 +9,6 @@
 class MovementSystem : public ISystem {
  public:
   void Update();
+  void playerUpdate();
+  void enemiesUpdate();
 };

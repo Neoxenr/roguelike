@@ -12,10 +12,7 @@ class LevelGenerator {
   std::map<std::pair<std::string, std::pair<int, int>>, char> data;
 
  public:
-  LevelGenerator() {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
-  }
+  LevelGenerator();
   void generateLevel(const std::string level_name);
-  void deleteDuplicate();
   const std::map<std::pair<std::string, std::pair<int, int>>, char>& getData();
 };

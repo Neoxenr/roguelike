@@ -24,6 +24,10 @@ bool CollisionComponent::IsEnemy() const {
   return is_enemy;
 }
 
+bool CollisionComponent::IsPlayer() const {
+  return is_player;
+}
+
 bool CollisionComponent::IsNextDoor() const {
   return is_next_door;
 }

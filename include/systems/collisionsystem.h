@@ -9,4 +9,7 @@
 class CollisionSystem : public ISystem{
  public:
   void Update();
+  void backdoorUpdate();
+  void playerUpdate();
+  void enemiesUpdate();
 };

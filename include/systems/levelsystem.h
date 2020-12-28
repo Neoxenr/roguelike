@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "../components/levelsinformationcomponent.h"
+#include "../components/attackcomponent.h"
 #include "../components/positioncomponent.h"
 #include "../components/statscomponent.h"
 #include "../components/healthcomponent.h"
@@ -31,6 +32,7 @@ class LevelSystem : public ISystem {
   std::pair<int, int> FindDoor(const std::string level_name);
   void Create(const std::string level_name);
   void getDataForLevels(const bool mode);
+  void FillPointsAllMap();
   void Change();
   void Clear();
   void Update();

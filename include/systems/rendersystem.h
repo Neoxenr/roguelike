@@ -15,5 +15,7 @@ class RenderSystem : public ISystem {
   void Start();
   void Main();
   void Stats();
+  void Win();
+  void Lose();
   void Update();
 };

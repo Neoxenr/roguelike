@@ -13,7 +13,7 @@ class LevelReader : public IReader {
   std::map<std::pair<std::string, std::pair<int, int>>, char> data;
 
  public:
-  LevelReader() {}
+  LevelReader();
   void readLevel(const std::string level_name);
   const std::map<std::pair<std::string, std::pair<int, int>>, char>& getData();
 };
