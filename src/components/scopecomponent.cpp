@@ -8,14 +8,6 @@ float ScopeComponent::getXMax() const {
   return x_max;
 }
 
-float ScopeComponent::getYMin() const {
-  return y_min;
-}
-
-float ScopeComponent::getYMax() const {
-  return y_max;
-}
-
 bool ScopeComponent::IsNext() const {
   return is_next;
 }

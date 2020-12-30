@@ -9,6 +9,21 @@ std::pair<int, int> LevelSystem::FindDoor(const std::string level_name) {
   return std::make_pair(0, 0);
 }
 
+void LevelSystem::FillPointsAllMap() {
+  for (int y = 0; y < window_height; y++) {
+    for (int x = 0; x <= window_width; x++) {
+      if (!data.count(std::make_pair("level" + std::to_string(level_id), std::make_pair(x, y)))) {
+        {
+          auto temp = GetEntityManager()->CreateEntity();
+          temp->SetTag("Point");
+          temp->Add<PositionComponent>(std::make_shared<PositionComponent>(x, y));
+          temp->Add<TextureComponent>(std::make_shared<TextureComponent>(point_texture, point_color));
+        }
+      }
+    }
+  }
+}
+
 void LevelSystem::getDataForLevels(const bool mode) {
   if (!data_is_received) {
     if (mode) {
@@ -47,37 +62,41 @@ void LevelSystem::Create(const std::string level_name) {
   for (const auto& elem : data) {
     if (elem.first.first == level_name) {
       auto temp = GetEntityManager()->CreateEntity();
+
       if (elem.second == coin_texture) {
         temp->SetTag("Coin");
         temp->Add<TextureComponent>(std::make_shared<TextureComponent>(coin_texture, coin_color));
         temp->Add<PositionComponent>(
             std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
       }
+
       if (elem.second == wall_texture) {
         temp->SetTag("Wall");
         temp->Add<TextureComponent>(std::make_shared<TextureComponent>(wall_texture, wall_color));
         temp->Add<PositionComponent>(
             std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
       }
+
       if (elem.second == door_texture) {
         temp->SetTag("NextDoor");
         temp->Add<TextureComponent>(std::make_shared<TextureComponent>(door_texture, next_door_color));
         temp->Add<PositionComponent>(
             std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
       }
+
       if (elem.second == enemy_texture) {
         temp->SetTag("Enemy");
         temp->Add<TextureComponent>(std::make_shared<TextureComponent>(enemy_texture, enemy_color));
         temp->Add<PositionComponent>(
             std::make_shared<PositionComponent>(elem.first.second.first, elem.first.second.second));
-        temp->Add<ScopeComponent>(
-            std::make_shared<ScopeComponent>(elem.first.second.first - 5, elem.first.second.first + 5,
-                                             elem.first.second.second - 3, elem.first.second.second + 3));
-        temp->Add<HealthComponent>(std::make_shared<HealthComponent>(100));
         temp->Add<CollisionComponent>();
+        temp->Add<AttackComponent>(std::make_shared<AttackComponent>(false));
+        temp->Add<ScopeComponent>(
+            std::make_shared<ScopeComponent>(elem.first.second.first - 5, elem.first.second.first + 5));
       }
     }
   }
+  FillPointsAllMap();
 }
 
 void LevelSystem::Clear() {

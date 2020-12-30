@@ -33,6 +33,15 @@ Entity* EntityManager::FindFirstByTag(const std::string& tag) {
   return nullptr;
 }
 
+Entity* EntityManager::FindById(const size_t id) {
+  for (auto& entity : entities) {
+    if (entity->GetId() == id) {
+      return entity.get();
+    }
+  }
+  return nullptr;
+}
+
 const std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() {
   return entities;
 }
@@ -41,6 +50,16 @@ std::vector<size_t> EntityManager::getAllId() {
   std::vector<size_t> all_id;
   for (const auto& elem : entities) {
     all_id.push_back(elem->GetId());
+  }
+  return all_id;
+}
+
+std::vector<size_t> EntityManager::getAllIdByTag(const std::string& tag) {
+  std::vector<size_t> all_id;
+  for (const auto& elem : entities) {
+    if (elem->GetTag() == tag) {
+      all_id.push_back(elem->GetId());
+    }
   }
   return all_id;
 }

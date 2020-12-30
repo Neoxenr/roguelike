@@ -7,3 +7,11 @@ int StatsComponent::getCoinsCount() const {
 int StatsComponent::getStepsCount() const {
   return steps_count;
 }
+
+int StatsComponent::getLevelsCompletedCount() const {
+  return levels_completed_count;
+}
+
+int StatsComponent::getAllStepsCount() const {
+  return all_steps_count;
+}

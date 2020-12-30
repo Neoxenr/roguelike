@@ -2,7 +2,6 @@
 
 void ControlsSystem::Update() {
   auto player = GetEntityManager()->FindFirstByTag("Player");
-
   auto button = player->Get<ControlsComponent>();
 
   button->is_up = false;
